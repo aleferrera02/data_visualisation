@@ -1,0 +1,182 @@
+---
+title: "Cost of life and salaries in European countries"
+author: "Bulgarelli Luca, Ferrera Alessandro and Sigillò Massara Vincenzo"
+output: pdf_document
+geometry: margin=1.2in
+fontsize: 18pt
+---
+
+\fontsize{12pt}{14pt}\selectfont
+
+```{r Preprocessing, echo=FALSE, warning = FALSE, message= FALSE,error=FALSE}
+source("data/preprocessing.R")
+```
+
+# Introduction
+
+International students and workers are greatly attracted by the possibilities offered by Switzerland in terms of salaries and work opportunities. But is this actually a good choice, considering how notoriously high the cost of life in the country is? Wouldn't it be more favourable to live in a country with lower average salaries but also lower costs to face? This analysis takes into consideration various factors to assess the ratio between living expenses and wages across European states and also aims to establish if the presence of good universities in a country impacts this proportion, offering insights into the broader impact of higher education institutions on economic balance and opportunities.
+
+# The data
+
+The first dataset, used to evaluate life costs, is comprised of information gathered from **Numbeo.com**, a widely recognized global database that has been cited as a reliable source by several prominent international publications, including *The Economist*, *The New York Times* and *Forbes*. The dataset includes information from 2021, capturing the average cost of essential expenses such as housing, groceries, transportation, and additional services. This data serves as the foundation for estimating the average cost of living across various regions.
+
+A second dataset focuses on **monthly average salaries** in 2021. This data helps provide a comparison between regional income levels and the cost of living, allowing for a deeper understanding of economic conditions and financial well-being.
+
+To further enrich the analysis, a third dataset from the **QS University Ranking 2021** was used. This dataset provides valuable insights into global education standards by ranking universities based on academic reputation, employer reputation, and other key performance indicators. By integrating this dataset, we can consider the influence of educational institutions on the local economy, cost of living, and potential salary prospects for graduates.
+
+Lastly, a fourth dataset from the **World Happiness Report 2021**, a partnership between Gallup, Oxford University and other European institutes, was included to explore the relationship between living standards and happiness levels. This dataset ranks countries based on factors like social support, life expectancy, and freedom to make life choices. By incorporating this data, we can assess the broader impact of living conditions on individual well-being and societal happiness.
+
+Together, these datasets offer a comprehensive overview of economic and social factors, enabling a robust analysis of living standards and financial sustainability across different regions.
+
+# Method
+
+To estimate the overall cost of living, we analyzed key categories including food, transportation, housing, and additional expenses. For food costs, we calculated the monthly budget based on dining at inexpensive restaurants, mid-range meals for two, fast food, and a range of groceries that included staples like bread, milk, fruits, and proteins. In terms of transportation, our estimate incorporated the monthly public transport pass alongside costs associated with car ownership, factoring in popular vehicle prices and gasoline expenses. Housing costs were determined by combining rent for various types of apartments — both in city centers and suburbs — with average utility expenses, reflecting diverse living arrangements. Lastly, we included additional expenses for entertainment and clothing, such as cinema tickets and gym memberships. By aggregating these categories, we provided a comprehensive estimation of monthly living costs, helping individuals budget and understand financial well-being across various European regions.
+
+# Results
+
+## Cost of living throughout Europe
+
+Do certain areas of the continent consistently exhibit higher or lower living costs? Understanding these variations is crucial for anyone considering relocation, as the cost of housing, groceries, transportation, and other services can vary significantly from one country to another.
+
+A preliminary answer to these questions can be found by examining *Figure 1*, which provides a visual representation of the average cost of living across various European nations. This figure allows us to quickly identify clusters of countries with similar living costs and observe any geographical trends that may exist. For instance, are the more economically developed regions in Western and Northern Europe associated with higher living expenses compared to countries in Eastern or Southern Europe?
+
+The plot illustrates the average cost of living across European countries, employing a color scale that ranges from bright yellow to dark purple. The brighter colors, such as yellow and orange, are concentrated in the northern and western parts of the continent, highlighting the higher living costs in countries like Switzerland, Norway, and Ireland. These regions are known for their strong economies and advanced infrastructure, which often contribute to elevated expenses for housing, transportation, and everyday necessities. Meanwhile, countries in Eastern Europe, including Ukraine, Bulgaria, and Romania, are represented by deep purple hues, indicating significantly lower living costs. This disparity is reflective of the differing levels of economic development between Western and Eastern Europe, where the former generally boasts stronger labor markets and higher income levels. $\\$
+
+```{r Cost of living map, echo=FALSE, warning = FALSE, message= FALSE,error=FALSE, fig.width=5, fig.height=4,fig.align = 'center'}
+source("cost.R")
+```
+
+\begin{center}
+\textit{
+Figure 1: Average cost of living across European countries.
+}
+\end{center}
+
+$\\$
+
+Southern European countries like Spain, Italy, and Greece display costs somewhere in the middle, with these regions represented by intermediate shades between purple and red. These areas tend to balance relatively lower costs of living compared to Northern Europe, yet still higher than many Eastern European nations. The overall pattern observed from the plot suggests clear geographical and economic trends: the wealthier and more developed the country, particularly in the West and North, the higher the cost of living, while the reverse holds true in Eastern Europe, where costs are lower, reflecting different wage standards and economic conditions.
+
+## Impact of specific costs
+
+One might wonder if the impact of each cost category, e.g. food, transportation, is the same in every country in proportion to the total cost of living. Since *Figure 1* makes it clear that there is a distinction between Eastern and Western Europe, we decided to compare the two areas in terms of what percentage of the total life expense is represented by each expenditure type. The violin plots in *Figure 2* denote how the spending trend is quite differentiated between the two regions. While the percentage of the cost of food doesn't show a significant difference between the two areas, the cost of housing is much more relevant in Western Europe, where it represents a higher percentage of the total cost of living. This is likely due to the higher cost of housing in countries like UK, Netherlands and Ireland. The cost of transportation and other expenses, on the other hand, is more relevant in Eastern Europe, where it represents a higher percentage of the total cost of living.
+
+```{r Violin plot, echo=FALSE,warning = FALSE, message= FALSE,error=FALSE, fig.width=7, fig.height=2.6,fig.align = 'center'}
+source("violin.R")
+```
+
+\begin{center}
+\textit{
+Figure 2: Percentage of each type of cost on the total life expense.
+}
+\end{center}
+
+## Savings Ratio
+
+It is clear from *Figure 3* that, as expected, the average salary is higher in countries with higher costs of living. However, this doesn't necessarily mean that these countries are the best choice for those looking to save money. Anyway, also just taking a first glance at the plot, we can notice how salaries tend to increase more than costs in countries with higher costs of living. $\\$
+
+```{r Cost to salary, echo=FALSE, warning = FALSE, message= FALSE,error=FALSE, fig.width=5, fig.height=3.2,fig.align = 'center'}
+source("salary.R")
+```
+
+\begin{center}
+\textit{
+Figure 3: Cost of living to salary.
+}
+\end{center}
+
+$\\$ To get a more quantitative understanding of the financial landscape of European countries, an important aspect to consider is the **savings ratio**:$\\$ $$
+\text{Savings ratio} = \frac{\text{Average salary} - \text{Cost of living}}{\text{Average salary}}
+$$ $\\$This metric provides critical insight into the affordability of living in different regions by comparing the average cost of living with average salaries. Understanding this ratio is essential for both potential expatriates and international students, as it highlights the financial realities of relocating to a new country. In the following sections, we will present a comprehensive overview of the savings ratios and of its link to some factors across European countries, accompanied by visual representations that facilitate comparisons. Through this exploration, we aim to provide valuable insights into the economic dynamics at play.
+
+First of all, is the saving rate evenly distributed throughout Europe or does it follow a pattern similar to the cost of living? To answer this question, we can take a look at *Figure 4* to highlight how Eastern countries tend to have lower savings ratios compared to the Western ones. $\\$
+
+```{r Savings ratio, echo=FALSE, warning = FALSE, message= FALSE,error=FALSE, fig.width=7, fig.height=3,fig.align = 'center'}
+source("east_west.R")
+```
+
+\begin{center}
+\textit{
+Figure 4: Savings ratio throughout European countries.
+}
+\end{center}
+
+$\\$ To better understand how huge the difference actually is let's take into consideration some specific countries, representative of different salary levels, and visualise how their salaries and costs compare with each other. The barplot in *Figure 5* emphasizes the differences in how income levels match up with the cost of living across different economic environments, illustrating the disparities in financial well-being among the selected countries. $\\$
+
+```{r Empiled costs, echo=FALSE, warning = FALSE, message= FALSE,error=FALSE, fig.width=5, fig.height=3.5,fig.align = 'center'}
+source("barplots.R")
+```
+
+\begin{center}
+\textit{
+Figure 5: Comparison between salary and costs in specific countries.
+}
+\end{center}
+
+## University level
+
+We've examined the relationship between wages and living costs, using the savings ratio as a key indicator. Now, let’s consider another critical factor: the quality of a country’s universities.
+
+A strong university system not only provides education but also fosters innovation, research, and human capital development, which can, in turn, improve the economic landscape of a country. Higher education institutions contribute to creating a skilled workforce, capable of boosting productivity and potentially driving wages upward.
+
+This leads us to an important question: How does the quality of a country’s universities impact its overall economic prosperity as measured by the savings ratio? Could investing in education be one of the key drivers for a country to maintain or improve its economic standing, ensuring higher salaries and lower relative costs?
+
+By exploring the link between university quality and economic indicators, we can deepen our understanding of what makes a country truly “good” in terms of living conditions and economic opportunity.
+
+To do so, we investigated the correlation between the QS ranking of universities in a specific country and its savings ratio. For context, the QS ranking evaluates the academic reputation, employer reputation, and other key performance indicators of universities worldwide, providing a comprehensive assessment of educational quality. The scatter plot in *Figure 6a* shows how the two variables are, in fact, correlated. The trend seems to be logarithmic, with the savings ratio increasing more slowly as the university level increases. In *Figure 6b*, applying a logarithmic transformation to the data, we can see how the trend gets closer to a linear one. $\\$
+
+```{r QS ranking, echo=FALSE, warning = FALSE, message= FALSE,error=FALSE, fig.width=9, fig.height=3.5,fig.align = 'center'}
+source("university.R")
+```
+
+\begin{center}
+\textit{
+Figure 6a: Correlation between university level and savings ratio. \\Figure 6b: Logarithmic transformation of the data.}
+\end{center}
+
+$\\$ This suggests an interesting dynamic. In countries with lower-ranked universities, even a small improvement in the quality of higher education seems to have a significant positive impact on the savings ratio. This could mean that, from a student's perspective, moving from a country with lower-ranked universities to one with slightly better educational institutions can lead to significant gains in terms of economic prosperity.
+
+However, as university quality continues to rise, we observe a diminishing effect on the savings ratio. At higher levels of university excellence, the economic benefits appear to stabilize, indicating that once a country reaches a certain threshold of educational quality, the direct economic gains from further improvements become smaller.
+
+## Happiness
+
+Although moving to country with a higher savings ratio might seem favorable from a student's perspective, does this effectively bring to an increased life satisfaction? Is the financial status of a country a reflection of the happiness of its citizens?
+
+To explore these questions, we’ve looked at the World Happiness Ranking, which assesses how various factors contribute to overall well-being in different countries. This ranking takes into account aspects such as social support, life expectancy and freedom, offering a comprehensive view of what contributes to happiness on a national level.
+
+In examining this ranking, we find a positive correlation between the savings ratio and happiness levels. As illustrated in *Figure 7*, countries with higher savings ratios often report increased levels of happiness. This relationship highlights the importance of financial well-being as a significant factor in fostering overall life satisfaction.
+
+$\\$
+
+```{r Happiness, echo=FALSE, warning = FALSE, message= FALSE,error=FALSE, fig.width=3.7, fig.height=3,fig.align = 'center'}
+source("goodness_vs_happiness.R")
+```
+
+\begin{center}
+\textit{
+Figure 7: Correlation between savings ratio and level of happiness.
+}
+\end{center}
+
+$\\$ 
+
+However, this is just a generalized correlation, that doesn't takes into account each personal idea of happiness.
+
+# Conclusion
+
+Our analysis of the European economic landscape has revealed several significant patterns. We've identified clear geographical disparities in the relationship between cost of living and salaries, with Western and Northern European countries generally offering better savings ratios compared to those in Eastern Europe, despite higher costs.
+
+Our exploration also uncovered a notable correlation between a country's university quality and its economic well-being, as measured through the savings ratio. Countries with higher-ranked academic institutions tend to demonstrate greater economic prosperity.
+
+Finally, we observed a connection between a country's savings ratio and the reported happiness levels of its citizens. This relationship highlights the potential influence of financial stability on overall well-being, while recognizing that happiness is affected by multiple factors beyond economics.
+
+These findings provide a data-driven perspective on the complex interplay between education, economy, and life satisfaction across European countries. While they offer valuable insights, it's important to consider that individual experiences are shaped by a multitude of personal and cultural factors beyond these economic indicators.
+
+# Bibliography
+
+-   QS World University Rankings. (2021). QS World University Rankings 2021. Retrieved from: $\\$<https://www.topuniversities.com/university-rankings/world-university-rankings/2021>
+
+-   World Happiness Report. (2021). World Happiness Report 2021. Retrieved from: <https://worldhappiness.report/ed/2021/>
+
+-   Kaggle. (2021). Monthly Average Salary. Retrieved from:$\\$ <https://www.kaggle.com/datasets/emspell/average-eu-salaries>
+
+-   Numbeo. Cost of Living Index. Retrieved from:$\\$ <https://www.numbeo.com/cost-of-living/>
